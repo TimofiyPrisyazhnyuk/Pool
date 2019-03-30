@@ -1,14 +1,22 @@
 <?php
 
-namespace Pool\Tests;
+namespace Tests;
 
-use Pool\WorkerPool;
+use WorkerPool;
 
-require __DIR__ . '/../StringReverseWorker.php';
-require __DIR__ . '/../WorkerPool.php';
+spl_autoload_register(function ($class) {
+    include __DIR__ . '/../' . $class . '.php';
+});
 
+/**
+ * Class PoolTest
+ * @package Tests
+ */
 class PoolTest
 {
+    /**
+     * Test can get new instance.
+     */
     public function testCanGetNewInstancesWithGet()
     {
         $pool = new WorkerPool();
@@ -17,6 +25,9 @@ class PoolTest
         print_r($pool->count());
     }
 
+    /**
+     * Test can get same instance.
+     */
     public function testCanGetSameInstanceTwiceWhenDisposingItFirst()
     {
         $pool = new WorkerPool();
